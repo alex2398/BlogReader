@@ -7,12 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BD15C69C1B736432002F4781 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD15C69B1B736432002F4781 /* TableViewController.m */; };
+		BD15C69E1B736439002F4781 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD15C69D1B736439002F4781 /* MainStoryboard.storyboard */; };
+		BD20F12B1B7211600037C5A7 /* BlogPost.m in Sources */ = {isa = PBXBuildFile; fileRef = BD20F12A1B7211600037C5A7 /* BlogPost.m */; };
 		BD48B42F1B70E7A200516F09 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BD48B42E1B70E7A200516F09 /* main.m */; };
 		BD48B4321B70E7A200516F09 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BD48B4311B70E7A200516F09 /* AppDelegate.m */; };
 		BD48B43A1B70E7A200516F09 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD48B4391B70E7A200516F09 /* Images.xcassets */; };
 		BD48B4491B70E7A300516F09 /* BlogReader2Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = BD48B4481B70E7A300516F09 /* BlogReader2Tests.m */; };
-		BD48B4581B70EAAA00516F09 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD48B4571B70EAAA00516F09 /* MainStoryboard.storyboard */; };
-		BD48B45B1B70F62800516F09 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD48B45A1B70F62800516F09 /* TableViewController.m */; };
+		BDCC25FB1B73441C00D1868C /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDCC25FA1B73441C00D1868C /* WebViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,6 +28,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BD15C69A1B736423002F4781 /* TableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
+		BD15C69B1B736432002F4781 /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
+		BD15C69D1B736439002F4781 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
+		BD20F1291B7211600037C5A7 /* BlogPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlogPost.h; sourceTree = "<group>"; };
+		BD20F12A1B7211600037C5A7 /* BlogPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlogPost.m; sourceTree = "<group>"; };
 		BD48B4291B70E7A200516F09 /* BlogReader2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlogReader2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD48B42D1B70E7A200516F09 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BD48B42E1B70E7A200516F09 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -35,9 +42,8 @@
 		BD48B4421B70E7A300516F09 /* BlogReader2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlogReader2Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD48B4471B70E7A300516F09 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BD48B4481B70E7A300516F09 /* BlogReader2Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlogReader2Tests.m; sourceTree = "<group>"; };
-		BD48B4571B70EAAA00516F09 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = MainStoryboard.storyboard; path = ../MainStoryboard.storyboard; sourceTree = "<group>"; };
-		BD48B4591B70F62800516F09 /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TableViewController.h; path = ../TableViewController.h; sourceTree = "<group>"; };
-		BD48B45A1B70F62800516F09 /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TableViewController.m; path = ../TableViewController.m; sourceTree = "<group>"; };
+		BDCC25F91B73441C00D1868C /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		BDCC25FA1B73441C00D1868C /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,12 +64,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1174EEFB857F971DEC9BF3A0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		3E6C2C9E7C04B9F869AB0474 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		BD48B4201B70E7A200516F09 = {
 			isa = PBXGroup;
 			children = (
 				BD48B42B1B70E7A200516F09 /* BlogReader2 */,
 				BD48B4451B70E7A300516F09 /* BlogReader2Tests */,
 				BD48B42A1B70E7A200516F09 /* Products */,
+				1174EEFB857F971DEC9BF3A0 /* Pods */,
+				3E6C2C9E7C04B9F869AB0474 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -79,11 +101,15 @@
 		BD48B42B1B70E7A200516F09 /* BlogReader2 */ = {
 			isa = PBXGroup;
 			children = (
-				BD48B4591B70F62800516F09 /* TableViewController.h */,
-				BD48B45A1B70F62800516F09 /* TableViewController.m */,
-				BD48B4571B70EAAA00516F09 /* MainStoryboard.storyboard */,
+				BD15C69B1B736432002F4781 /* TableViewController.m */,
+				BD15C69A1B736423002F4781 /* TableViewController.h */,
+				BDCC25F91B73441C00D1868C /* WebViewController.h */,
+				BDCC25FA1B73441C00D1868C /* WebViewController.m */,
+				BD20F1291B7211600037C5A7 /* BlogPost.h */,
+				BD20F12A1B7211600037C5A7 /* BlogPost.m */,
 				BD48B4301B70E7A200516F09 /* AppDelegate.h */,
 				BD48B4311B70E7A200516F09 /* AppDelegate.m */,
+				BD15C69D1B736439002F4781 /* MainStoryboard.storyboard */,
 				BD48B4391B70E7A200516F09 /* Images.xcassets */,
 				BD48B42C1B70E7A200516F09 /* Supporting Files */,
 			);
@@ -196,7 +222,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BD48B4581B70EAAA00516F09 /* MainStoryboard.storyboard in Resources */,
+				BD15C69E1B736439002F4781 /* MainStoryboard.storyboard in Resources */,
 				BD48B43A1B70E7A200516F09 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -216,8 +242,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				BD48B4321B70E7A200516F09 /* AppDelegate.m in Sources */,
+				BD15C69C1B736432002F4781 /* TableViewController.m in Sources */,
+				BDCC25FB1B73441C00D1868C /* WebViewController.m in Sources */,
 				BD48B42F1B70E7A200516F09 /* main.m in Sources */,
-				BD48B45B1B70F62800516F09 /* TableViewController.m in Sources */,
+				BD20F12B1B7211600037C5A7 /* BlogPost.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -389,6 +417,7 @@
 				BD48B44E1B70E7A300516F09 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BD48B44F1B70E7A300516F09 /* Build configuration list for PBXNativeTarget "BlogReader2Tests" */ = {
 			isa = XCConfigurationList;
@@ -397,6 +426,7 @@
 				BD48B4511B70E7A300516F09 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
