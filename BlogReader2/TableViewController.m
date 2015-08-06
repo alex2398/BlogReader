@@ -20,47 +20,70 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
+    // URL para las entradas recientes del blog
     NSString *urlTeamtreeHouse = @"http://blog.teamtreehouse.com/api/get_recent_summary/";
     
 
-    @try {
-            // Declaramos la variable de error
-        NSError *error = nil;
-        // Creamos un objeto NSURL para almacenar la direccion a la que acceder para obtener los datos JSON
-        NSURL *blogURL = [NSURL URLWithString:urlTeamtreeHouse];
-        // Creamos un objeto NSData para almacenar los datos obtenidos de la url
-        NSData *jsonData = [NSData dataWithContentsOfURL:blogURL];
     
-        NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&error];
+    // Creamos un objeto NSURL para almacenar la direccion a la que acceder para obtener los datos JSON
+    NSURL *blogURL = [NSURL URLWithString:urlTeamtreeHouse];
+    
+    // Esta forma es síncrona
+    
+    // Declaramos la variable de error
+    // NSError *error = nil;
+    // NSData *jsonData = [NSData dataWithContentsOfURL:blogURL];
 
-        // Creamos el array a partir de los datos JSON
-        self.blogPosts = [NSMutableArray array];
     
-        NSArray *blogPostArray = [dataDictionary objectForKey:@"posts"];
+    // Asynchronous
     
-        // Recorremos el array de posts obtenido
+    // Creamos la sesión compartida (la sesión de la app es singleton)
+    NSURLSession *session = [NSURLSession sharedSession];
     
-        for (NSDictionary *bpDictionary in blogPostArray) {
-        
-            BlogPost *blogPost = [BlogPost blogPostWithTitle:[bpDictionary objectForKey:@"title"]];
-            blogPost.author = [bpDictionary objectForKey:@"author"];
-            blogPost.image = [bpDictionary objectForKey:@"thumbnail"];
-            blogPost.date = [bpDictionary objectForKey:@"date"];
-            blogPost.url = [NSURL URLWithString:[bpDictionary objectForKey:@"url"]];
-        
-            [self.blogPosts addObject:blogPost];
-        }
-    }
-    @catch (NSException * e) {
-        NSLog(@"Error al obtener los datos");
-    }
-}
+    // Nos bajamos los datos desde la url blogURL
+    NSURLSessionDownloadTask *task = [session downloadTaskWithURL:blogURL
+        completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
+            
+            if (!error) {
+                // Creamos un objeto NSData para almacenar los datos obtenidos de la url
+                
+                NSData *jsonData = [[NSData alloc] initWithContentsOfURL:location];
+                
+                NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&error];
+                
+                // Creamos el array a partir de los datos JSON
+                self.blogPosts = [NSMutableArray array];
+                
+                NSArray *blogPostArray = [dataDictionary objectForKey:@"posts"];
+                
+                // Recorremos el array de posts obtenido
+                
+                for (NSDictionary *bpDictionary in blogPostArray) {
+                    
+                    BlogPost *blogPost = [BlogPost blogPostWithTitle:[bpDictionary objectForKey:@"title"]];
+                    blogPost.author = [bpDictionary objectForKey:@"author"];
+                    blogPost.image = [bpDictionary objectForKey:@"thumbnail"];
+                    blogPost.date = [bpDictionary objectForKey:@"date"];
+                    blogPost.url = [NSURL URLWithString:[bpDictionary objectForKey:@"url"]];
+                    
+                    [self.blogPosts addObject:blogPost];
+                }
+            } else {
+                NSLog(@"Error al obtener los datos");
+            }
+            
+            // Devolvemos el foco a la hebra principal y actualizamos el tableView
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                [self.tableView reloadData];
+            });
 
-             
-                       
-                       
-             
+    }];
+    [task resume];
+        
+    }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -89,19 +112,44 @@
     // Configure the cell...
     BlogPost *blogPost = [self.blogPosts objectAtIndex:indexPath.row];
     
+    // Primero asignamos una imagen a la celda, y luego bajamos la imagen y la actualizamos si existe
+    cell.imageView.image = [UIImage imageNamed:@"treehouse.png"];
+    
     // Añadimos la imagen del JSON
     // Si el dato es nulo, JSON devuelve la clase NSNull, por lo que comprobamos la clase antes de nada
     if ([blogPost.image isKindOfClass:[NSString class]]) {
+        
+        // Modo síncrono
+        
         // Creamos el NSData desde la URL y creamos la imagen desde ella
-        NSData *imageData = [NSData dataWithContentsOfURL:blogPost.imageURL];
-        UIImage *image = [UIImage imageWithData:imageData];
+        // NSData *imageData = [NSData dataWithContentsOfURL:blogPost.imageURL];
+        // UIImage *image = [UIImage imageWithData:imageData];
         
-        // Asignamos la imagen a la imagen embebida en la celda del tableView
-        cell.imageView.image = image;
+        //  Modo asíncrono
+        NSURLSession *session = [NSURLSession sharedSession];
+        NSURLSessionDownloadTask *task = [session downloadTaskWithURL:blogPost.imageURL completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
+            
+            if (!error){
+                NSData *data = [[NSData alloc]initWithContentsOfURL:location];
+                UIImage *image = [UIImage imageWithData:data];
+                // Devolvemos el foco a la hebra principal y actualizamos la imagen
+                dispatch_async(dispatch_get_main_queue(), ^{
+
+                    // Asignamos la imagen a la imagen embebida en la celda del tableView
+
+                    cell.imageView.image = image;
+                });
+            } else {
+                NSLog(@"Error al obtener los datos");
+            }
+            
+        }];
         
-    } else {
-        cell.imageView.image = [UIImage imageNamed:@"treehouse.png"];
+        [task resume];
+        
     }
+    
+    
     
     cell.textLabel.text = blogPost.title;
     cell.detailTextLabel.text = [NSString stringWithFormat:@"Author: %@ - %@",blogPost.author, [blogPost formattedDate]];
